@@ -38,6 +38,51 @@ const saveRecord = record => {
     transObjectStore.add(record);
 };
 
+const uploadTrans = () => {
+    // open a transaction on db
+    const transaction = db.transaction(['new_trans'], 'readwrite');
+
+    // access object store
+    const transObjectStore = transaction.objectStore('new_trans');
+
+    // get all records from store
+    const getAll = transObjectStore.getAll();
+
+    getAll.onsuccess = function() {
+        // if data exists, send to api server
+        if (getAll.result.length > 0) {
+            fetch('/api/transaction', {
+                method: 'POST', 
+                body: JSON.stringify(getAll.result),
+                headers: {
+                    Accept: 'application/json, text/plain, */*',
+                    'Content-Type' : 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(serverResponse => {
+                    if (serverResponse.message) {
+                        throw new Error(serverResponse);
+                    }
+
+                    // open one more transaction
+                    const transaction = db.transaction(['new_trans'], 'readwrite');
+
+                    // access the objectStore
+                    const transObjectStore = transaction.objectStore('new_trans');
+
+                    // clear all items from store
+                    transObjectStore.clear();
+
+                    alert('All saved transactions have been submitted!');
+                    location.reload();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        };
+    };
+};
 
 // listen for app coming back online   
 window.addEventListener('online', uploadTrans);
