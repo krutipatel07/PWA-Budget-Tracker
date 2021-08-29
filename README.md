@@ -26,7 +26,7 @@ To use the budget tracker, simply provide a transaction name and transaction amo
 ![Download Application Onto Desktop](./images/screenshot2.png)
 
 ## Questions
-If you have any questions about the repo, please [open an issue](https://github.com/krutipatel07/PWA-Budget-Tracker/issues) or contact me via email at deckiedevs@gmail.com. You can find more of my work on my GitHub, [kruti](https://github.com/krutipatel07/).
+If you have any questions about the repo, please [open an issue](https://github.com/krutipatel07/PWA-Budget-Tracker/issues) or contact me via email at kruti.patel0709@gmail.com. You can find more of my work on my GitHub, [kruti](https://github.com/krutipatel07/).
     
 ## Credits
 * [UCF Coding Boot Camp Starter Code](https://github.com/coding-boot-camp/symmetrical-bassoon)
